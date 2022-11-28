@@ -1,5 +1,13 @@
+body {
+    background-color: #111236;
+}
+
 .card-wrapper {
     margin-top: 10%;
-    border: 2px solid;
     padding: 5rem;
+}
+
+a {
+    text-decoration: none;
+    color: black;
 }

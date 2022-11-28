@@ -61,12 +61,12 @@ $hotels = [
 <body>
 
     <header class="text-center">
-        <h1 class="mt-3">PHP Hotels</h1>
+        <h1 class="mt-3 text-white">PHP Hotels</h1>
     </header>
 
     <main>
         <div class="container">
-            <div class="card-wrapper gap-4 d-flex">
+            <div class="card-wrapper gap-4 d-flex border border-2 border-white rounded">
                 <?php foreach ($hotels as $hotel) : ?>
                     <div class="card w-25">
                         <div class="card-body">
