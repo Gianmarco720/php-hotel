@@ -39,6 +39,8 @@ $hotels = [
     ],
 
 ];
+
+
 ?>
 
 <!doctype html>
@@ -66,14 +68,26 @@ $hotels = [
 
     <main>
         <div class="container">
+            <form action="index.php" method="get">
+                <select name="parking" id="parking">
+                    <option selected hidden>Cerchi un Hotel con parcheggio?</option>
+                    <option value="true">Si</option>
+                    <option value="false">No</option>
+                </select>
+            </form>
             <div class="card-wrapper gap-4 d-flex border border-2 border-white rounded">
                 <?php foreach ($hotels as $hotel) : ?>
                     <div class="card w-25">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $hotel['name'] ?></h5>
-                            <h6 class="card-subtitle mb-2 text-muted"><?php echo $hotel['vote'] ?></h6>
-                            <h6><?php echo $hotel['parking'] ?></h6>
-                            <h6><?php echo $hotel['distance_to_center'] ?></h6>
+                            <h6 class="card-subtitle py-2 text-muted">Voto: <?php echo $hotel['vote'] ?></h6>
+                            <h6 class="py-2">Parcheggio:
+                                <?php if ($hotel['parking']) {
+                                    echo 'Si';
+                                } else {
+                                    echo 'No';
+                                } ?></h6>
+                            <h6 class="py-2"><?php echo $hotel['distance_to_center'] ?>Km dal centro</h6>
                             <p class="card-text"><?php echo $hotel['description'] ?></p>
                             <a href="#" class="card-link">Prenota Ora ></a>
                         </div>
