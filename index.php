@@ -53,29 +53,35 @@ $hotels = [
     <!-- Bootstrap CSS v5.2.1 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
+    <!-- My Css -->
+    <link rel="stylesheet" href="./assets/style.css">
+
 </head>
 
 <body>
 
-    <ul>
-        <?php foreach ($hotels as $hotel) : ?>
-            <li>
-                <h1><?php echo $hotel['name'] ?></h1>
-            </li>
-            <li>
-                Descrizione: <?php echo $hotel['description'] ?>
-            </li>
-            <li>
-                Parcheggio: <?php echo $hotel['parking'] ?>
-            </li>
-            <li>
-                Voto: <?php echo $hotel['vote'] ?>
-            </li>
-            <li>
-                Distanza dal centro: <?php echo $hotel['distance_to_center'] ?>
-            </li>
-        <?php endforeach; ?>
-    </ul>
+    <header class="text-center">
+        <h1 class="mt-3">PHP Hotels</h1>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="card-wrapper gap-4 d-flex">
+                <?php foreach ($hotels as $hotel) : ?>
+                    <div class="card w-25">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $hotel['name'] ?></h5>
+                            <h6 class="card-subtitle mb-2 text-muted"><?php echo $hotel['vote'] ?></h6>
+                            <h6><?php echo $hotel['parking'] ?></h6>
+                            <h6><?php echo $hotel['distance_to_center'] ?></h6>
+                            <p class="card-text"><?php echo $hotel['description'] ?></p>
+                            <a href="#" class="card-link">Prenota Ora ></a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </main>
 
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
