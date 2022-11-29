@@ -40,6 +40,27 @@ $hotels = [
 
 ];
 
+// Filtro parcheggio e voto
+if (isset($_GET['parking']) && isset($_GET['stars'])) {
+    //var_dump('Filtro parcheggio e voto');
+    $hotels = array_filter($hotels, function ($hotel) {
+        return $hotel['parking'] && $hotel['vote'] >= $_GET['stars'];
+    });
+
+    // Filtro parcheggio
+} elseif (isset($_GET['parking'])) {
+    //var_dump('Filtro parcheggio');
+    $hotels = array_filter($hotels, function ($hotel) {
+        return $hotel['parking'];
+    });
+
+    // Filtro voto
+} elseif (isset($_GET['stars'])) {
+    //var_dump('Filtro voto');
+    $hotels = array_filter($hotels, function ($hotel) {
+        return $hotel['vote'] >= $_GET['stars'];
+    });
+};
 
 ?>
 
@@ -68,25 +89,35 @@ $hotels = [
 
     <main>
         <div class="container">
-            <form action="index.php" method="get">
-                <select name="parking" id="parking">
-                    <option selected hidden>Cerchi un Hotel con parcheggio?</option>
-                    <option value="true">Si</option>
-                    <option value="false">No</option>
-                </select>
-            </form>
+            <div class="filter pt-3">
+                <form action="index.php" method="get">
+                    <label for="parking" class="text-white">
+                        Cerchi un Hotel con parcheggio?
+                        <input type="checkbox" name="parking" id="parking">
+                    </label>
+                    <select name="stars" id="stars">
+                        <option value="" selected hidden>Filtra in base al voto</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary btn-sm">Invio</button>
+                    <button type="reset" class="btn btn-secondary btn-sm">Pulisci</button>
+                </form>
+            </div>
             <div class="card-wrapper gap-4 d-flex border border-2 border-white rounded">
                 <?php foreach ($hotels as $hotel) : ?>
                     <div class="card w-25">
                         <div class="card-body">
-                            <h5 class="card-title"><?php echo $hotel['name'] ?></h5>
-                            <h6 class="card-subtitle py-2 text-muted">Voto: <?php echo $hotel['vote'] ?></h6>
-                            <h6 class="py-2">Parcheggio:
-                                <?php if ($hotel['parking']) {
-                                    echo 'Si';
-                                } else {
-                                    echo 'No';
-                                } ?></h6>
+                            <h5 class="card-title my_title"><?php echo $hotel['name'] ?></h5>
+                            <h6 class="card-subtitle py-2 text-muted">Voto: <?php echo $hotel['vote'] ?>/5</h6>
+                            <h6 class="py-2">Parcheggio: <?php if ($hotel['parking']) {
+                                                                echo 'Si';
+                                                            } else {
+                                                                echo 'No';
+                                                            } ?></h6>
                             <h6 class="py-2"><?php echo $hotel['distance_to_center'] ?>Km dal centro</h6>
                             <p class="card-text"><?php echo $hotel['description'] ?></p>
                             <a href="#" class="card-link">Prenota Ora ></a>
